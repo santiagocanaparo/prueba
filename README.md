@@ -87,3 +87,46 @@ Para evitar confusiones, el trabajo se divide en fases progresivas. Cada fase de
 5. Documentar aprendizajes y bloqueos al finalizar cada fase para mejorar la siguiente iteración.
 
 > Si en algún punto tienes dudas, revisa el entregable de la fase correspondiente: cada uno actúa como checklist para saber si puedes continuar a la siguiente etapa.
+
+## 8. ¿Qué hacer si GitHub muestra "Apply changes and continue locally?"
+
+Ese mensaje aparece cuando GitHub no puede aplicar automáticamente un parche porque el trabajo se originó en otro repositorio o la rama tiene cambios nuevos. Para continuar sin bloquearte, sigue estos pasos:
+
+1. **Clona el repositorio correcto:**
+   ```bash
+   git clone git@github.com:santiagocanaparo/prueba.git
+   cd prueba
+   ```
+   Si ya lo tienes clonado, asegúrate de hacer `git fetch --all` para traer los cambios más recientes.
+
+2. **Crea una rama de trabajo:**
+   ```bash
+   git checkout -b fix/aplicar-cambios-local
+   ```
+
+3. **Sincroniza con la rama base:**
+   ```bash
+   git checkout main
+   git pull origin main
+   git checkout fix/aplicar-cambios-local
+   git merge main
+   ```
+   Resuelve cualquier conflicto que aparezca durante el merge.
+
+4. **Aplica manualmente los cambios:**
+   - Copia el diff propuesto desde la interfaz de GitHub y pégalo en tus archivos.
+   - O usa `git apply <archivo.diff>` si descargaste el parche.
+
+5. **Prueba y valida localmente:** ejecuta los comandos necesarios para verificar que el proyecto sigue funcionando (por ejemplo, `npm test`, `npm run lint`, etc.).
+
+6. **Haz commit y sube la rama:**
+   ```bash
+   git status
+   git add .
+   git commit -m "Describe el cambio aplicado"
+   git push origin fix/aplicar-cambios-local
+   ```
+
+7. **Crea el Pull Request:** desde GitHub, abre un PR desde tu rama `fix/aplicar-cambios-local` hacia `main`.
+
+> Consejo: si el parche viene de una tarea previa y sigue fallando, revisa el historial de commits para asegurarte de que los archivos de destino no cambiaron de ubicación o nombre.

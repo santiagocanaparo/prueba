@@ -3,6 +3,8 @@
 ## 1. Concepto General
 La aplicación busca ofrecer una experiencia narrativa inmersiva y personalizada. El usuario introduce una idea inicial y la plataforma, impulsada por modelos de IA, genera el desarrollo completo del relato: texto, narración en voz e ilustraciones. Cada historia se construye de forma iterativa, permitiendo que el usuario influya en el transcurso de los eventos y disfrute de un cuento único en cada sesión.
 
+> **¿Qué debes construir?** Una plataforma web donde, a partir de un prompt inicial, el usuario reciba texto, voz e imágenes generados por IA de forma coordinada y evolutiva.
+
 ## 2. Características Clave
 
 ### a. Generación de Historias (Motor de Texto)
@@ -44,3 +46,44 @@ La aplicación busca ofrecer una experiencia narrativa inmersiva y personalizada
    - Audio: narración del párrafo con la voz seleccionada.
 5. Al finalizar el segmento, aparecen opciones como "Continuar la historia" y "¿Qué quieres que haga ahora?".
 6. El proceso se repite, construyendo un relato dinámico y personalizado en cada sesión.
+
+## 4. MVP y Entregables por Fase
+
+Para evitar confusiones, el trabajo se divide en fases progresivas. Cada fase debe cerrarse con un entregable funcional y demostrable.
+
+| Fase | Objetivo | Alcance minimo | Indicador de finalizacion |
+|------|----------|----------------|---------------------------|
+| 1. Diseno | Validar idea y experiencia | Bocetos de UI, definicion de estilo visual, mock de flujo de usuario | Prototipo navegable en Figma o similar aprobado por stakeholders |
+| 2. MVP Texto | Generar historias basicas | Prompt inicial, seleccion de genero, generacion capitulo a capitulo con memoria | Lectura fluida de dos iteraciones completas de historia |
+| 3. MVP Voz | Anadir narracion TTS | Integracion con motor TTS, seleccion de voces, controles basicos | Reproduccion y pausa sincronizada con texto |
+| 4. MVP Imagenes | Ilustraciones por escena | Generacion de imagen por parrafo, selector de estilo | Dos historias completas con ilustraciones consistentes |
+| 5. Interactividad avanzada | Opciones ramificadas | Botones "Que pasa despues?" y continuidad condicionada | Usuario completa una historia eligiendo diferentes ramas |
+| 6. Publicacion | Preparar lanzamiento | Guardado/exportacion, onboarding, metricas basicas | Beta cerrada disponible para usuarios reales |
+
+## 5. Historias de Usuario Prioritarias
+
+1. **Como usuario nuevo**, quiero introducir una idea breve y recibir el primer capítulo de mi historia para entender el potencial de la app.
+2. **Como usuario que disfruta de audiocuentos**, quiero escoger la voz del narrador para sentir la historia más cercana a mis preferencias.
+3. **Como usuario visual**, quiero elegir el estilo artístico de las ilustraciones para conectar mejor con el relato.
+4. **Como creador curioso**, quiero decidir qué sucede a continuación para sentir que estoy co-creando la trama.
+5. **Como usuario recurrente**, quiero guardar mis historias favoritas para revivirlas o compartirlas después.
+
+## 6. Requerimientos Técnicos Sugeridos
+
+- **Backend / APIs**: Node.js (NestJS, Express) o Python (FastAPI) para orquestar las llamadas a modelos de texto, voz e imagen.
+- **Modelos de IA**: APIs de texto (GPT, Claude), TTS (Azure Speech, ElevenLabs), y generación de imágenes (DALL·E, Stable Diffusion). Abstraer la integración tras interfaces propias para facilitar sustituciones futuras.
+- **Frontend**: React o Vue con componentes modulares para texto, controles de audio y galería de ilustraciones. Uso de Tailwind o Chakra UI para velocidad de iteración.
+- **Persistencia**: Base de datos documental (MongoDB, Firestore) para almacenar historias, prompts y activos generados.
+- **Estado y Sincronización**: WebSockets o Server-Sent Events para actualizar texto, audio e imágenes en tiempo real a medida que la IA responde.
+- **Infraestructura**: Despliegue inicial en Vercel/Netlify (frontend) y Render/Fly.io (backend). Considerar colas (Redis) para tareas pesadas como renderizados de imagen.
+- **Observabilidad**: Logging estructurado, métricas de uso (segmentación por género de historia, voces más usadas) y seguimiento de costos por llamada a API.
+
+## 7. Próximos Pasos Claros
+
+1. Validar el alcance del MVP con el equipo y ajustar el backlog si es necesario.
+2. Definir stack tecnológico definitivo y crear repositorio monorepo o multi-repo según convenga.
+3. Diseñar prototipo de alta fidelidad de la vista principal (texto + imagen + controles).
+4. Implementar la fase 2 del MVP (motor de texto) con pruebas de coherencia narrativa y almacenamiento mínimo.
+5. Documentar aprendizajes y bloqueos al finalizar cada fase para mejorar la siguiente iteración.
+
+> Si en algún punto tienes dudas, revisa el entregable de la fase correspondiente: cada uno actúa como checklist para saber si puedes continuar a la siguiente etapa.
